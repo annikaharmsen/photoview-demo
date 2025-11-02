@@ -16,9 +16,7 @@ export default function useFetch() {
 			const data = await res.json();
 
 			if (!data.success) {
-				throw new Error(
-					data.error || res.statusText || 'Unknown error occurred.'
-				);
+				throw new Error(data.error || 'Unknown error occurred.');
 			}
 
 			return data;
