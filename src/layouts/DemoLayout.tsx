@@ -39,7 +39,7 @@ export default function DemoLayout({ children }: PropsWithChildren) {
 	);
 
 	const DemoSidebar = () => (
-		<DemoInfo className='sticky top-0 w-100 lg:flex items-center flex-col text-center justify-around hidden h-screen bg-white p-4' />
+		<DemoInfo className='sticky top-0 w-100 lg:flex items-center flex-col text-center justify-around hidden min-h-screen h-full bg-white p-4' />
 	);
 
 	return (

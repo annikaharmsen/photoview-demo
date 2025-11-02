@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import Link, { A, LinkButton } from './Link';
+import Link, { A } from './Link';
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { H2 } from './headings';
 import { CopyButton } from './buttons';
@@ -28,8 +28,22 @@ export default function DemoInfo({
 					<p>
 						<Link to='/register'>Create an account.</Link>
 						<br />
-						(For the purposes of this demo, you are not required to
-						use a registered email)
+						or <Link to='/login'>log in</Link> as "Test User" with
+						<br />
+						<br />
+						<CopyButton
+							copiedAlert='Test email saved to clipboard'
+							tooltipText='Click to copy email'
+						>
+							test@example.com
+						</CopyButton>
+						<br />
+						<CopyButton
+							copiedAlert='Test password saved to clipboard'
+							tooltipText='Click to copy password'
+						>
+							Test123
+						</CopyButton>
 					</p>
 				</li>
 				<li>
