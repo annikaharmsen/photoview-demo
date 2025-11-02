@@ -9,6 +9,7 @@ import Purchase from './pages/Purchase';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Complete from './pages/Complete';
+import NotFound from './pages/NotFound';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 			<Route path='/checkout' Component={Checkout} />
 			<Route path='/complete' Component={Complete} />
 			<Route path='/upload' Component={Upload} />
+			<Route path='*' Component={NotFound} />
 		</Routes>
 	);
 }

@@ -13,7 +13,7 @@ export default function CenteredLayout({
 	return (
 		<div
 			className={twMerge(
-				'flex items-center justify-center h-full pt-12',
+				'flex items-center justify-center h-full py-12',
 				row ? 'flex-row' : 'flex-col',
 				className
 			)}
