@@ -63,14 +63,14 @@ export default function Upload() {
 		if (data.description) formData.append('description', data.description);
 
 		try {
-			await xhr(
+			const data = (await xhr(
 				import.meta.env.VITE_API_URL + 'app/images.php',
 				formData,
 				'POST'
-			);
+			)) as { uploaded: number; skipped: number; message: string };
 
 			setMessages({
-				success: 'Photo(s) uploaded successfully',
+				success: data.message,
 				error: ''
 			});
 
