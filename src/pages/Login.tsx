@@ -2,7 +2,7 @@ import Card from '../components/Card';
 import { H1 } from '../components/headings';
 import { Error, Input, Label, Success } from '../components/form-elements';
 import FormGrid, { InputCell } from '../components/FormGrid';
-import useHTTP from '../hooks/use-http';
+import useFetch from '../hooks/use-fetch';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ export default function Login() {
 		error: string;
 	}>({ success: '', error: '' });
 
-	const send = useHTTP();
+	const send = useFetch();
 	const navigate = useNavigate();
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import { H1 } from '../components/headings';
 import { useState, useEffect } from 'react';
-import useHTTP from '../hooks/use-http';
+import useFetch from '../hooks/use-fetch';
 import type { Photo, Photos } from '../types/app';
 import Link from '../components/Link';
 import AppLayout from '../layouts/AppLayout';
@@ -10,7 +10,7 @@ import AppLayout from '../layouts/AppLayout';
 export default function Gallery() {
 	const [photos, setPhotos] = useState<Photos>([]);
 	const [error, setError] = useState<string>('');
-	const send = useHTTP();
+	const send = useFetch();
 
 	useEffect(() => {
 		try {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import type { CartItem, CartItems } from '../types/app';
-import useHTTP from './use-http';
+import useFetch from './use-fetch';
 
 export default function useCart() {
 	const [items, setItems] = useState<CartItems>([]);
 	const [errors, setErrors] = useState<{ get?: string; update?: string }>({});
-	const send = useHTTP();
+	const send = useFetch();
 
 	const getItems = () => {
 		try {

@@ -3,7 +3,7 @@ import { SubmitButton } from '../components/buttons';
 import Card from '../components/Card';
 import { H1, H2 } from '../components/headings';
 import { useEffect, useState } from 'react';
-import useHTTP from '../hooks/use-http';
+import useFetch from '../hooks/use-fetch';
 import {
 	Error,
 	Input,
@@ -40,7 +40,7 @@ export default function Purchase() {
 		error: string;
 	}>({ success: '', error: '' });
 
-	const send = useHTTP();
+	const send = useFetch();
 
 	useEffect(() => {
 		try {

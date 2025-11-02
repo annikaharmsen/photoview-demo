@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
 // helper function to catch server errors; returns data object
-export default function useHTTP() {
+export default function useFetch() {
 	const navigate = useNavigate();
-	async function send(url: string, options = {}) {
+	async function sendFetch(url: string, options = {}) {
 		try {
-			const res = await fetch(url, { credentials: 'include', ...options });
+			const res = await fetch(url, {
+				credentials: 'include',
+				...options
+			});
 
 			// handle unauthenticated code
 			if (res.status === 401) navigate('/login');
@@ -25,5 +28,5 @@ export default function useHTTP() {
 		}
 	}
 
-	return send;
+	return sendFetch;
 }

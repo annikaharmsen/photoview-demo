@@ -11,7 +11,7 @@ import { loadStripe, type Appearance } from '@stripe/stripe-js';
 import StripePayment from '../components/StripePaymentForm';
 import type { SubmitHandler } from 'react-hook-form';
 import { Error, Success } from '../components/form-elements';
-import useHTTP from '../hooks/use-http';
+import useFetch from '../hooks/use-fetch';
 import Link from '../components/Link';
 import AppLayout from '../layouts/AppLayout';
 
@@ -27,7 +27,7 @@ const appearance: Appearance = {
 };
 
 export default function Checkout() {
-	const send = useHTTP();
+	const send = useFetch();
 	const cart = useCart();
 	const [clientSecret, setClientSecret] = useState<string>();
 	const [messages, setMessages] = useState<{
