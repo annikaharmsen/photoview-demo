@@ -12,10 +12,12 @@ import {
 import FormGrid, { InputCell } from '../components/FormGrid';
 import { H1 } from '../components/headings';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import useHTTP from '../hooks/use-http';
+import useFetch from '../hooks/use-fetch';
 import type { Users } from '../types/app';
 import Link from '../components/Link';
 import AppLayout from '../layouts/AppLayout';
+import useXHR from '../hooks/use-xhr';
+import { twMerge } from 'tailwind-merge';
 
 type Inputs = {
 	user_id: number;
@@ -30,6 +32,7 @@ export default function Upload() {
 		reset,
 		formState: { errors }
 	} = useForm<Inputs>();
+	const [processing, setProcessing] = useState<boolean>(false);
 
 	const [messages, setMessages] = useState<{
 		success: string;
@@ -38,10 +41,11 @@ export default function Upload() {
 
 	const [users, setUsers] = useState<Users>([]);
 
-	const send = useHTTP();
+	const sendFetch = useFetch();
+	const { xhr, progress } = useXHR();
 
 	useEffect(() => {
-		send(import.meta.env.VITE_API_URL + 'app/users.php', {
+		sendFetch(import.meta.env.VITE_API_URL + 'app/users.php', {
 			method: 'GET'
 		}).then((data) => {
 			setUsers(data.users || []);
@@ -49,6 +53,7 @@ export default function Upload() {
 	}, []);
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		setProcessing(true);
 		setMessages({ success: '', error: '' });
 
 		const formData = new FormData();
@@ -58,10 +63,11 @@ export default function Upload() {
 		if (data.description) formData.append('description', data.description);
 
 		try {
-			await send(import.meta.env.VITE_API_URL + 'app/images.php', {
-				method: 'POST',
-				body: formData
-			});
+			await xhr(
+				import.meta.env.VITE_API_URL + 'app/images.php',
+				formData,
+				'POST'
+			);
 
 			setMessages({
 				success: 'Photo(s) uploaded successfully',
@@ -76,6 +82,8 @@ export default function Upload() {
 					(error as Error).message ||
 					'Failed to upload photos. Please try again.'
 			});
+		} finally {
+			setProcessing(false);
 		}
 	};
 
@@ -138,7 +146,24 @@ export default function Upload() {
 							/>
 						</InputCell>
 
-						<SubmitButton>Upload</SubmitButton>
+						<div className='relative h-fit w-full'>
+							<SubmitButton
+								disabled={processing}
+								className={twMerge(
+									'relative w-full z-1',
+									processing &&
+										'bg-black/30 hover:bg-black/30'
+								)}
+							>
+								{processing ? 'Uploading...' : 'Upload'}
+							</SubmitButton>
+							{processing && (
+								<div
+									className='absolute top-0 left-0 h-full rounded-lg bg-blue-500'
+									style={{ width: progress + '%' }}
+								/>
+							)}
+						</div>
 					</FormGrid>
 				</form>
 
