@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import Link, { A, LinkButton } from './Link';
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { H2 } from './headings';
+import { CopyButton } from './buttons';
 
 export default function DemoInfo({
 	horizontal = false,
@@ -54,20 +55,12 @@ export default function DemoInfo({
 						<br />
 						<br />
 						<span className='text-gray-600 text-md'>
-							<LinkButton
-								onClick={() => {
-									navigator.clipboard.writeText(
-										'4242424242424242'
-									);
-									alert('Card number copied to clipboard');
-								}}
-								className='relative group'
+							<CopyButton
+								copiedAlert='Card number saved to clipboard'
+								tooltipText='Click to copy card number'
 							>
 								4242424242424242
-								<span className='bg-blue-800/80 text-white hidden rounded-full absolute left-full ml-2 top-1/2 -translate-y-1/2 group-hover:block px-2 w-max text-sm'>
-									Click to copy
-								</span>
-							</LinkButton>
+							</CopyButton>
 							<br />
 							CVC: Any 3 digits
 							<br />
