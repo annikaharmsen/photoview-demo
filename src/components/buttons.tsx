@@ -66,7 +66,7 @@ export const CopyButton = ({
 			navigator.clipboard.writeText(children);
 			alert(copiedAlert);
 		}}
-		className='relative group'
+		className='relative group cursor-copy'
 	>
 		{children}
 		<span className='bg-blue-800/80 text-white hidden rounded-full absolute left-full ml-2 top-1/2 -translate-y-1/2 group-hover:block px-2 w-max text-sm'>

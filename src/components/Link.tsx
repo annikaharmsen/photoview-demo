@@ -47,7 +47,10 @@ export const LinkButton = ({
 	HTMLButtonElement
 >) => (
 	<button
-		className={twMerge('text-blue-500 hover:underline', className)}
+		className={twMerge(
+			'text-blue-500 hover:underline cursor-pointer',
+			className
+		)}
 		{...props}
 	>
 		{children}

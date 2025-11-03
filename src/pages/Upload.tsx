@@ -91,7 +91,11 @@ export default function Upload() {
 		<AppLayout>
 			<H1>Upload Photos</H1>
 			<Card>
-				<form id='upload-form' onSubmit={handleSubmit(onSubmit)}>
+				<form
+					className={processing ? 'cursor-progress' : ''}
+					id='upload-form'
+					onSubmit={handleSubmit(onSubmit)}
+				>
 					<FormGrid>
 						<InputCell>
 							<Label htmlFor='user_id'>Select User:</Label>
