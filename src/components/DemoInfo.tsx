@@ -26,38 +26,22 @@ export default function DemoInfo({
 				<li>
 					<span className='text-6xl mb-4'>1</span>
 					<p>
-						<Link to='/register'>Create an account.</Link>
+						<Link to='/register'>Create an account</Link>
 						<br />
-						or <Link to='/login'>log in</Link> as "Test User" with
-						<br />
-						<br />
-						<CopyButton
-							copiedAlert='Test email saved to clipboard'
-							tooltipText='Click to copy email'
-						>
-							test@example.com
-						</CopyButton>
-						<br />
-						<CopyButton
-							copiedAlert='Test password saved to clipboard'
-							tooltipText='Click to copy password'
-						>
-							Test123
-						</CopyButton>
+						or <Link to='/login'>log in</Link> as Test User
 					</p>
 				</li>
 				<li>
 					<span className='text-6xl mb-4'>2</span>
 					<p>
-						<Link to='/upload'>Upload photos</Link>
-						<br /> to your account
+						Explore the <Link to='/gallery'>gallery</Link> and add
+						items to your cart
 					</p>
 				</li>
 				<li>
 					<span className='text-6xl mb-4'>3</span>
 					<p>
-						Explore the <Link to='/gallery'>gallery</Link>, add
-						items to your cart, and mock a checkout with{' '}
+						Mock a checkout with{' '}
 						<A
 							target='_blank'
 							rel='relation_name'
