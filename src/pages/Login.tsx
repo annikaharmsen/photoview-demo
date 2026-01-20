@@ -7,7 +7,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Link from '../components/Link';
-import { SubmitButton } from '../components/buttons';
+import { Button, SubmitButton } from '../components/buttons';
 import AppLayout from '../layouts/AppLayout';
 import env from '../lib/env';
 
@@ -30,6 +30,29 @@ export default function Login() {
 
 	const send = useFetch();
 	const navigate = useNavigate();
+
+	const handleTestLogin = async () => {
+		try {
+			await send(env.apiUrl + 'app/login.php', {
+				method: 'POST',
+				body: JSON.stringify(env.testUser)
+			});
+
+			setMessages({
+				success: 'Login successful. Proceeding to gallery...',
+				error: ''
+			});
+
+			setTimeout(() => {
+				navigate('/gallery');
+			}, 3000);
+		} catch {
+			setMessages({
+				success: '',
+				error: 'Login failed. Please try again.'
+			});
+		}
+	};
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		const formData = new FormData();
@@ -61,8 +84,8 @@ export default function Login() {
 	return (
 		<AppLayout>
 			<H1>Login</H1>
-			<Card className='px-16 py-12'>
-				<form id='register-form' onSubmit={handleSubmit(onSubmit)}>
+			<Card className='px-16 py-8'>
+				<form id='login-form' onSubmit={handleSubmit(onSubmit)}>
 					<FormGrid>
 						<InputCell>
 							<Label htmlFor='email'>Email: </Label>
@@ -97,12 +120,24 @@ export default function Login() {
 
 					<InputCell>
 						<SubmitButton />
-						{messages.success && (
-							<Success>{messages.success}</Success>
-						)}
-						{messages.error && <Error>{messages.error}</Error>}
 					</InputCell>
 				</form>
+				<span className='block w-full text-center text-lg my-4'>
+					OR
+				</span>
+				<Button className='w-full mb-6' onClick={handleTestLogin}>
+					Log In as Test User
+				</Button>
+				{messages.success && (
+					<Success className='text-center block'>
+						{messages.success}
+					</Success>
+				)}
+				{messages.error && (
+					<Error className='text-center block'>
+						{messages.error}
+					</Error>
+				)}
 			</Card>
 			<span className='mt-4'>
 				Don't have an account? <Link to='/register'>Register</Link>{' '}
