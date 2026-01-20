@@ -18,12 +18,12 @@ export default function Cart() {
 		<AppLayout gallery>
 			<H1>Shopping Cart</H1>
 			<Card>
-				<CardSection
-					variant='outline'
-					className='flex flex-col justify-center gap-4 mb-4'
-				>
-					{cart.items ? (
-						cart.items.map((item) => (
+				{cart.items.length ? (
+					<CardSection
+						variant='outline'
+						className='flex flex-col justify-center gap-4 mb-4'
+					>
+						{cart.items.map((item) => (
 							<CardSection className='grid md:grid-cols-[32%_auto] gap-4'>
 								<CartItemImg item={item} className='rounded' />
 								<CartItemInfo
@@ -39,16 +39,16 @@ export default function Cart() {
 									}}
 								/>
 							</CardSection>
-						))
-					) : (
-						<p>
-							No items in cart.{' '}
-							<Link to='/gallery'>
-								Return to gallery by clicking here.
-							</Link>
-						</p>
-					)}
-				</CardSection>
+						))}
+					</CardSection>
+				) : (
+					<p className='pb-4'>
+						No items in cart.{' '}
+						<Link to='/gallery'>
+							Return to gallery by clicking here.
+						</Link>
+					</p>
+				)}
 				<div className='w-full flex flex-col gap-4'>
 					<span className='font-bold text-right'>
 						Total: ${cart.getTotal().toFixed(2)}
