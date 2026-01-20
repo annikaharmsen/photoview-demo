@@ -4,6 +4,7 @@ import { H1, H2, H3 } from './headings';
 import QuantityInput from './QuantityInput';
 import useCart from '../hooks/use-cart';
 import { twMerge } from 'tailwind-merge';
+import env from '../lib/env';
 
 export const CartItemImg = ({
 	item,
@@ -12,11 +13,7 @@ export const CartItemImg = ({
 	item: CartItem;
 }) => (
 	<img
-		src={
-			import.meta.env.VITE_API_URL +
-			'/uploads/optimized/' +
-			item.photo.image_url
-		}
+		src={env.apiUrl + '/uploads/optimized/' + item.photo.image_url}
 		alt={item.photo.description || 'Photo'}
 		{...props}
 	/>

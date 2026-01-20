@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Link from '../components/Link';
 import { SubmitButton } from '../components/buttons';
 import AppLayout from '../layouts/AppLayout';
+import env from '../lib/env';
 
 type Inputs = {
 	name: string;
@@ -42,7 +43,7 @@ export default function Register() {
 		for (key in data) formData.append(key, data[key]);
 
 		try {
-			await send(import.meta.env.VITE_API_URL + 'app/register.php', {
+			await send(env.apiUrl + 'app/register.php', {
 				method: 'POST',
 				body: formData
 			});

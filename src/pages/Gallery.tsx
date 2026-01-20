@@ -6,6 +6,7 @@ import useFetch from '../hooks/use-fetch';
 import type { Photo, Photos } from '../types/app';
 import Link from '../components/Link';
 import AppLayout from '../layouts/AppLayout';
+import env from '../lib/env';
 
 export default function Gallery() {
 	const [photos, setPhotos] = useState<Photos>([]);
@@ -14,7 +15,7 @@ export default function Gallery() {
 
 	useEffect(() => {
 		try {
-			send(import.meta.env.VITE_API_URL + 'app/images.php', {
+			send(env.apiUrl + 'app/images.php', {
 				method: 'GET'
 			}).then((data) => setPhotos(data.photos));
 		} catch (error) {
@@ -46,11 +47,7 @@ const PhotoComponent = ({ photo }: { photo: Photo }) => {
 
 	return (
 		<img
-			src={
-				import.meta.env.VITE_API_URL +
-				'/uploads/optimized/' +
-				photo.image_url
-			}
+			src={env.apiUrl + '/uploads/optimized/' + photo.image_url}
 			alt={photo.description || 'Photo'}
 			id={photo.photo_id + ''}
 			onClick={() => navigate(`/purchase/${photo.photo_id}`)}

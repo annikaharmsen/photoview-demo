@@ -14,6 +14,7 @@ import { Error, Success } from '../components/form-elements';
 import useFetch from '../hooks/use-fetch';
 import Link from '../components/Link';
 import AppLayout from '../layouts/AppLayout';
+import env from '../lib/env';
 
 const stripePromise = loadStripe(
 	'pk_test_51RFyJ6Lu5AWoCdyfkdsr1NP8cn7toL8b6WceOniIw1bdbAamksCoCdEt870Pk7kyJLeJBksECfpEblkJbKvkKPPI00uGFUzMHI'
@@ -39,7 +40,7 @@ export default function Checkout() {
 
 	const onSubmitAddress: SubmitHandler<AddressInputs> = (addressData) => {
 		try {
-			send(import.meta.env.VITE_API_URL + 'app/order.php', {
+			send(env.apiUrl + 'app/order.php', {
 				method: 'POST',
 				body: JSON.stringify({
 					shipping_address: addressData,

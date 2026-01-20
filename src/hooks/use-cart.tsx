@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { CartItem, CartItems } from '../types/app';
 import useFetch from './use-fetch';
+import env from '../lib/env';
 
 export default function useCart() {
 	const [items, setItems] = useState<CartItems>([]);
@@ -9,7 +10,7 @@ export default function useCart() {
 
 	const getItems = () => {
 		try {
-			send(import.meta.env.VITE_API_URL + 'app/cart.php', {
+			send(env.apiUrl + 'app/cart.php', {
 				method: 'GET'
 			}).then((data) => setItems(data.items));
 		} catch (error) {
@@ -19,7 +20,7 @@ export default function useCart() {
 
 	const updateItemQuantity = (cartItemID: number, quantity: number) => {
 		try {
-			send(import.meta.env.VITE_API_URL + 'app/cart.php', {
+			send(env.apiUrl + 'app/cart.php', {
 				method: 'PUT',
 				body: JSON.stringify({
 					cart_item_id: cartItemID,

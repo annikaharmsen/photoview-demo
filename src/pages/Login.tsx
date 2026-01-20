@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Link from '../components/Link';
 import { SubmitButton } from '../components/buttons';
 import AppLayout from '../layouts/AppLayout';
+import env from '../lib/env';
 
 type Inputs = {
 	email: string;
@@ -36,7 +37,7 @@ export default function Login() {
 		for (key in data) formData.append(key, data[key]);
 
 		try {
-			await send(import.meta.env.VITE_API_URL + 'app/login.php', {
+			await send(env.apiUrl + 'app/login.php', {
 				method: 'POST',
 				body: formData
 			});

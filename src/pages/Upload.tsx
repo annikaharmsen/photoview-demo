@@ -18,6 +18,7 @@ import Link from '../components/Link';
 import AppLayout from '../layouts/AppLayout';
 import useXHR from '../hooks/use-xhr';
 import { twMerge } from 'tailwind-merge';
+import env from '../lib/env';
 
 type Inputs = {
 	user_id: number;
@@ -45,7 +46,7 @@ export default function Upload() {
 	const { xhr, progress } = useXHR();
 
 	useEffect(() => {
-		sendFetch(import.meta.env.VITE_API_URL + 'app/users.php', {
+		sendFetch(env.apiUrl + 'app/users.php', {
 			method: 'GET'
 		}).then((data) => {
 			setUsers(data.users || []);
@@ -64,7 +65,7 @@ export default function Upload() {
 
 		try {
 			const data = (await xhr(
-				import.meta.env.VITE_API_URL + 'app/images.php',
+				env.apiUrl + 'app/images.php',
 				formData,
 				'POST'
 			)) as { uploaded: number; skipped: number; message: string };

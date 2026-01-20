@@ -15,6 +15,7 @@ import FormGrid, { InputCell } from '../components/FormGrid';
 import type { Formats, Photo } from '../types/app';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import AppLayout from '../layouts/AppLayout';
+import env from '../lib/env';
 
 type Inputs = {
 	format_id: number;
@@ -44,13 +45,9 @@ export default function Purchase() {
 
 	useEffect(() => {
 		try {
-			send(
-				import.meta.env.VITE_API_URL +
-					`app/images.php?photo_id=${photo_id}`,
-				{
-					method: 'GET'
-				}
-			).then((data) => setPhoto(data.photo));
+			send(env.apiUrl + `app/images.php?photo_id=${photo_id}`, {
+				method: 'GET'
+			}).then((data) => setPhoto(data.photo));
 		} catch (error) {
 			setPageErrors([...pageErrors, (error as Error).message]);
 		}
@@ -58,7 +55,7 @@ export default function Purchase() {
 
 	useEffect(() => {
 		try {
-			send(import.meta.env.VITE_API_URL + 'app/formats.php', {
+			send(env.apiUrl + 'app/formats.php', {
 				method: 'GET'
 			}).then((data) => setFormats(data.formats));
 		} catch (error) {
@@ -76,7 +73,7 @@ export default function Purchase() {
 		formData.append('quantity', data.quantity + '');
 
 		try {
-			await send(import.meta.env.VITE_API_URL + 'app/cart.php', {
+			await send(env.apiUrl + 'app/cart.php', {
 				method: 'POST',
 				body: formData
 			});
@@ -106,7 +103,7 @@ export default function Purchase() {
 					{photo ? (
 						<img
 							src={
-								import.meta.env.VITE_API_URL +
+								env.apiUrl +
 								'/uploads/optimized/' +
 								photo.image_url
 							}

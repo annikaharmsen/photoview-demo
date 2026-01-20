@@ -7,11 +7,12 @@ import {
 } from '@stripe/react-stripe-js';
 import { SubmitButton } from './buttons';
 import { Error } from './form-elements';
+import env from '../lib/env';
 
 export default function StripePaymentForm() {
 	const stripe = useStripe();
 	const elements = useElements();
-	const completePageURL = import.meta.env.VITE_WEB_URL + 'complete';
+	const completePageURL = env.webUrl + 'complete';
 
 	const [error, setError] = useState<string>('');
 	const [isLoading, setIsLoading] = useState(false);
