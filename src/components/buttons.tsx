@@ -1,7 +1,8 @@
-import type {
-	DetailedHTMLProps,
-	HTMLAttributes,
-	InputHTMLAttributes
+import {
+	useState,
+	type DetailedHTMLProps,
+	type HTMLAttributes,
+	type InputHTMLAttributes
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { LinkButton } from './Link';
@@ -54,23 +55,26 @@ export const SubmitButton = ({
 
 export const CopyButton = ({
 	children,
-	copiedAlert = 'Saved to clipboard',
 	tooltipText = 'Click to copy'
 }: {
 	children: string;
 	copiedAlert?: string;
 	tooltipText?: string;
-}) => (
-	<LinkButton
-		onClick={() => {
-			navigator.clipboard.writeText(children);
-			alert(copiedAlert);
-		}}
-		className='relative group cursor-copy'
-	>
-		{children}
-		<span className='bg-blue-800/80 text-white hidden rounded-full absolute left-full ml-2 top-1/2 -translate-y-1/2 group-hover:block px-2 w-max text-sm'>
-			{tooltipText}
-		</span>
-	</LinkButton>
-);
+}) => {
+	const [hoverText, setHoverText] = useState(tooltipText);
+	return (
+		<LinkButton
+			onClick={() => {
+				navigator.clipboard.writeText(children);
+				setHoverText('Copied!');
+				setTimeout(() => setHoverText(tooltipText), 3000);
+			}}
+			className='relative group cursor-copy'
+		>
+			{children}
+			<span className='bg-blue-800/80 text-white hidden rounded-full absolute left-full ml-2 top-1/2 -translate-y-1/2 group-hover:block px-2 w-max text-sm'>
+				{hoverText}
+			</span>
+		</LinkButton>
+	);
+};
