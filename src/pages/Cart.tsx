@@ -19,44 +19,50 @@ export default function Cart() {
 			<H1>Shopping Cart</H1>
 			<Card>
 				{cart.items.length ? (
-					<CardSection
-						variant='outline'
-						className='flex flex-col justify-center gap-4 mb-4'
-					>
-						{cart.items.map((item) => (
-							<CardSection className='grid md:grid-cols-[32%_auto] gap-4'>
-								<CartItemImg item={item} className='rounded' />
-								<CartItemInfo
-									item={item}
-									headingComponent={H2}
-									showDescription
-									onQtyChange={(value) => {
-										cart.updateItemQuantity(
-											item.cart_item_id,
-											value
-										);
-										cart.getItems();
-									}}
-								/>
-							</CardSection>
-						))}
-					</CardSection>
+					<>
+						<CardSection
+							variant='outline'
+							className='flex flex-col justify-center gap-4 mb-4'
+						>
+							{cart.items.map((item) => (
+								<CardSection className='grid md:grid-cols-[32%_auto] gap-4'>
+									<CartItemImg
+										item={item}
+										className='rounded'
+									/>
+									<CartItemInfo
+										item={item}
+										headingComponent={H2}
+										showDescription
+										onQtyChange={(value) => {
+											cart.updateItemQuantity(
+												item.cart_item_id,
+												value
+											);
+											cart.getItems();
+										}}
+									/>
+								</CardSection>
+							))}
+						</CardSection>
+
+						<div className='w-full flex flex-col gap-4'>
+							<span className='font-bold text-right'>
+								Total: ${cart.getTotal().toFixed(2)}
+							</span>
+							<Button onClick={() => navigate('/checkout')}>
+								Checkout
+							</Button>
+						</div>
+					</>
 				) : (
-					<p className='pb-4'>
+					<p>
 						No items in cart.{' '}
 						<Link to='/gallery'>
 							Return to gallery by clicking here.
 						</Link>
 					</p>
 				)}
-				<div className='w-full flex flex-col gap-4'>
-					<span className='font-bold text-right'>
-						Total: ${cart.getTotal().toFixed(2)}
-					</span>
-					<Button onClick={() => navigate('/checkout')}>
-						Checkout
-					</Button>
-				</div>
 			</Card>
 		</AppLayout>
 	);
