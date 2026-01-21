@@ -33,9 +33,13 @@ export default function Login() {
 
 	const handleTestLogin = async () => {
 		try {
+			const formData = new FormData();
+			formData.append('email', env.testUser.email);
+			formData.append('password', env.testUser.password);
+
 			await send(env.apiUrl + 'app/login.php', {
 				method: 'POST',
-				body: JSON.stringify(env.testUser)
+				body: formData
 			});
 
 			setMessages({
