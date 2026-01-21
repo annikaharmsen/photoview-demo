@@ -6,6 +6,16 @@ A React TypeScript frontend for the Photoview photo marketplace API, demonstrati
 
 [Live Demo](https://photoview.annikaharmsen.com/)
 
+### Screenshots
+
+| Login                      | Gallery                        | Purchase Options                                 |
+| -------------------------- | ------------------------------ | ------------------------------------------------ |
+| ![Login](docs/1-login.png) | ![Gallery](docs/2-gallery.png) | ![Purchase Options](docs/3-purchase-options.png) |
+
+| Cart                     | Shipping                         | Payment                        | Success                        |
+| ------------------------ | -------------------------------- | ------------------------------ | ------------------------------ |
+| ![Cart](docs/4-cart.png) | ![Shipping](docs/5-shipping.png) | ![Payment](docs/6-payment.png) | ![Success](docs/7-success.png) |
+
 ## Features
 
 - User registration and authentication
@@ -29,28 +39,33 @@ A React TypeScript frontend for the Photoview photo marketplace API, demonstrati
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/annikaharmsen/photoview-demo.git
 cd photoview-demo
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Create environment file:
+
 ```bash
 cp .env.example .env
 ```
 
 4. Configure your `.env` file:
+
 ```env
 VITE_API_URL=http://localhost/photoview/API/
 VITE_WEB_URL=http://localhost:5173/
 ```
 
 5. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -101,22 +116,25 @@ src/
 ## Custom hooks
 
 ### useFetch
+
 Wrapper around fetch that handles authentication redirects and standardized error responses from the API.
 
 ### useXHR
+
 XMLHttpRequest-based hook for file uploads, providing real-time progress tracking for large image uploads.
 
 ### useCart
+
 Cart state management with methods for fetching items, updating quantities, and calculating totals.
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
 | `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+| `npm run lint`    | Run ESLint               |
 
 ## License
 
